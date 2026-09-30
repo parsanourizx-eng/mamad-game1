@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ممد گیم</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:Tahoma,sans-serif; background:linear-gradient(135deg,#0f0f23,#1a1a3e); color:white; min-height:100vh; }
+#app { padding:20px; max-width:500px; margin:0 auto; }
+.screen { display:none; }
+.screen.active { display:block; }
+h1 { text-align:center; font-size:32px; margin:20px 0 30px; color:#6c5ce7; }
+h2 { text-align:center; margin:20px 0; color:#a29bfe; }
+h3 { margin:20px 0 10px; color:#a29bfe; }
+.balance-box { background:#1e1e3f; padding:20px; border-radius:15px; text-align:center; margin:20px 0; font-size:20px; border:2px solid #6c5ce7; }
+.btn { display:block; width:100%; background:linear-gradient(135deg,#6c5ce7,#a29bfe); color:white; border:none; padding:18px; margin:10px 0; border-radius:15px; font-size:18px; font-weight:bold; cursor:pointer; }
+.back { background:transparent; color:#a29bfe; border:none; font-size:16px; padding:10px; cursor:pointer; margin-bottom:10px; }
+.game-list { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.game-btn { background:#1e1e3f; color:white; border:2px solid #6c5ce7; padding:25px 10px; border-radius:15px; font-size:16px; cursor:pointer; }
+#result-dice { font-size:80px; text-align:center; margin:20px 0; }
+#result-text { text-align:center; font-size:18px; margin:20px 0; line-height:1.8; white-space:pre-line; }
+#rooms-list { background:#1e1e3f; padding:15px; border-radius:15px; min-height:100px; }
+.room-item { background:#2a2a5e; padding:12px; border-radius:10px; margin:8px 0; display:flex; justify-content:space-between; align-items:center; }
+.room-item button { background:#00b894; color:white; border:none; padding:8px 15px; border-radius:8px; cursor:pointer; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="screen-home" class="screen active">
+    <h1>🎮 ممد گیم</h1>
+    <div class="balance-box">💰 موجودی: <span id="balance">500,000</span></div>
+    <button class="btn" onclick="showScreen('offline')">🔴 بازی آفلاین</button>
+    <button class="btn" onclick="showScreen('online')">🟢 بازی آنلاین</button>
+    <button class="btn" onclick="showBalance()">👤 حساب کاربری</button>
+  </div>
+  <div id="screen-offline" class="screen">
+    <button class="back" onclick="showScreen('home')">← بازگشت</button>
+    <h2>🔴 بازی آفلاین</h2>
+    <div class="game-list">
+      <button class="game-btn" onclick="playOffline('🎲')">🎲 تاس</button>
+      <button class="game-btn" onclick="playOffline('🎰')">🎰 اسلات</button>
+      <button class="game-btn" onclick="playOffline('🎳')">🎳 بولینگ</button>
+      <button class="game-btn" onclick="playOffline('⚽')">⚽ فوتبال</button>
+      <button class="game-btn" onclick="playOffline('🎯')">🎯 دارت</button>
+    </div>
+  </div>
+  <div id="screen-online" class="screen">
+    <button class="back" onclick="showScreen('home')">← بازگشت</button>
+    <h2>🟢 بازی آنلاین</h2>
+    <button class="btn" onclick="createRoom()">+ ساخت اتاق جدید</button>
+    <h3>اتاق‌های باز:</h3>
+    <div id="rooms-list"></div>
+  </div>
+  <div id="screen-result" class="screen">
+    <h2 id="result-title">نتیجه</h2>
+    <div id="result-dice"></div>
+    <div id="result-text"></div>
+    <button class="btn" onclick="showScreen('home')">🏠 بازگشت</button>
+  </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
